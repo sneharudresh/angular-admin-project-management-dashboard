@@ -1,0 +1,147 @@
+ <div class="dialog-header">
+      <div class="header-content">
+        <mat-icon class="header-icon">add_circle</mat-icon>
+        <h2>Create New Project</h2>
+      </div>
+      <button mat-icon-button (click)="onCancel()" class="close-btn">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <mat-divider></mat-divider>
+    
+    <mat-dialog-content>
+      <form [formGroup]="projectForm" class="project-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Project Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter project name">
+            <mat-icon matPrefix>title</mat-icon>
+            @if (projectForm.get('name')?.hasError('required') && projectForm.get('name')?.touched) {
+              <mat-error>Project name is required</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-columns">
+          <mat-form-field appearance="outline">
+            <mat-label>Project Type</mat-label>
+            <mat-select formControlName="type" placeholder="Select type">
+              <mat-option value="Install">
+                <mat-icon>download</mat-icon>
+                Install
+              </mat-option>
+              <mat-option value="Migrate">
+                <mat-icon>sync_alt</mat-icon>
+                Migrate
+              </mat-option>
+              <mat-option value="Upgrade">
+                <mat-icon>upgrade</mat-icon>
+                Upgrade
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>category</mat-icon>
+            @if (projectForm.get('type')?.hasError('required') && projectForm.get('type')?.touched) {
+              <mat-error>Type is required</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status" placeholder="Select status">
+              <mat-option value="pending">
+                <mat-icon class="status-icon pending">pending</mat-icon>
+                Pending
+              </mat-option>
+              <mat-option value="active">
+                <mat-icon class="status-icon active">play_circle</mat-icon>
+                Active
+              </mat-option>
+              <mat-option value="completed">
+                <mat-icon class="status-icon completed">check_circle</mat-icon>
+                Completed
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>flag</mat-icon>
+            @if (projectForm.get('status')?.hasError('required') && projectForm.get('status')?.touched) {
+              <mat-error>Status is required</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-columns">
+          <mat-form-field appearance="outline">
+            <mat-label>Assigned To</mat-label>
+            <mat-select formControlName="assignedTo" placeholder="Select member">
+              <mat-option value="John Doe">
+                <mat-icon>person</mat-icon>
+                John Doe
+              </mat-option>
+              <mat-option value="Jane Smith">
+                <mat-icon>person</mat-icon>
+                Jane Smith
+              </mat-option>
+              <mat-option value="Bob Johnson">
+                <mat-icon>person</mat-icon>
+                Bob Johnson
+              </mat-option>
+              <mat-option value="Alice Williams">
+                <mat-icon>person</mat-icon>
+                Alice Williams
+              </mat-option>
+              <mat-option value="Charlie Brown">
+                <mat-icon>person</mat-icon>
+                Charlie Brown
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>person_outline</mat-icon>
+            @if (projectForm.get('assignedTo')?.hasError('required') && projectForm.get('assignedTo')?.touched) {
+              <mat-error>Assignment is required</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="priority" placeholder="Select priority">
+              <mat-option value="high">
+                <mat-icon class="priority-icon high">arrow_upward</mat-icon>
+                High
+              </mat-option>
+              <mat-option value="medium">
+                <mat-icon class="priority-icon medium">remove</mat-icon>
+                Medium
+              </mat-option>
+              <mat-option value="low">
+                <mat-icon class="priority-icon low">arrow_downward</mat-icon>
+                Low
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>priority_high</mat-icon>
+            @if (projectForm.get('priority')?.hasError('required') && projectForm.get('priority')?.touched) {
+              <mat-error>Priority is required</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description (Optional)</mat-label>
+            <textarea matInput formControlName="description" rows="4" placeholder="Enter project description"></textarea>
+            <mat-icon matPrefix>description</mat-icon>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-dialog-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-dialog-actions>
+      <button mat-stroked-button (click)="onCancel()">
+        <mat-icon>close</mat-icon>
+        Cancel
+      </button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="projectForm.invalid">
+        <mat-icon>check</mat-icon>
+        Create Project
+      </button>
+    </mat-dialog-actions>

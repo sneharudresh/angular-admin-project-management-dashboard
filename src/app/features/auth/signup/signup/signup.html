@@ -1,0 +1,97 @@
+<div class="signup-container">
+      <div class="signup-split">
+        <!-- Left Section -->
+        <div class="left-section">
+          <img src="https://i.postimg.cc/vmyQftM9/admin.png" alt="Logo" class="logo-img">
+          <h1>Admin Dashboard</h1>
+          <p class="description">Join us to manage your projects efficiently with our comprehensive admin dashboard. Track progress, monitor installations, and handle migrations seamlessly.</p>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+          <mat-card class="signup-card">
+            <mat-card-header>
+              <div class="logo-section">
+                <mat-icon class="logo-icon">dashboard</mat-icon>
+                <h1>Admin Dashboard</h1>
+              </div>
+            </mat-card-header>
+            
+            <mat-card-content>
+              <h2>Create Account</h2>
+              <p class="subtitle">Sign up to get started</p>
+
+              <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Full Name</mat-label>
+                  <input matInput type="text" formControlName="name" placeholder="Enter your full name">
+                  <mat-icon matPrefix>person</mat-icon>
+                  @if (signupForm.get('name')?.hasError('required') && signupForm.get('name')?.touched) {
+                    <mat-error>Name is required</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Email</mat-label>
+                  <input matInput type="email" formControlName="email" placeholder="Enter your email">
+                  <mat-icon matPrefix>email</mat-icon>
+                  @if (signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched) {
+                    <mat-error>Email is required</mat-error>
+                  }
+                  @if (signupForm.get('email')?.hasError('email')) {
+                    <mat-error>Invalid email format</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" placeholder="Enter your password">
+                  <mat-icon matPrefix>lock</mat-icon>
+                  <button mat-icon-button matSuffix type="button" (click)="hidePassword.set(!hidePassword())">
+                    <mat-icon>{{hidePassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  @if (signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched) {
+                    <mat-error>Password is required</mat-error>
+                  }
+                  @if (signupForm.get('password')?.hasError('minlength')) {
+                    <mat-error>Password must be at least 6 characters</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Confirm Password</mat-label>
+                  <input matInput [type]="hideConfirmPassword() ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm your password">
+                  <mat-icon matPrefix>lock</mat-icon>
+                  <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword.set(!hideConfirmPassword())">
+                    <mat-icon>{{hideConfirmPassword() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  @if (signupForm.get('confirmPassword')?.hasError('required') && signupForm.get('confirmPassword')?.touched) {
+                    <mat-error>Please confirm your password</mat-error>
+                  }
+                  @if (signupForm.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched) {
+                    <mat-error>Passwords do not match</mat-error>
+                  }
+                </mat-form-field>
+
+                @if (errorMessage()) {
+                  <div class="error-message">{{ errorMessage() }}</div>
+                }
+
+                <button mat-raised-button color="primary" type="submit" class="full-width submit-btn" [disabled]="loading() || signupForm.invalid">
+                  @if (loading()) {
+                    <mat-spinner diameter="20"></mat-spinner>
+                    <span>Creating account...</span>
+                  } @else {
+                    <span>Sign Up</span>
+                  }
+                </button>
+              </form>
+
+              <div class="login-link">
+                Already have an account? <a routerLink="/login">Login</a>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,229 @@
+<div class="dashboard-container">
+      <!-- Header -->
+      <mat-toolbar color="primary" class="header">
+        <div class="logo-section">
+          <mat-icon class="logo">dashboard</mat-icon>
+          <span class="logo-text">Admin Home</span>
+        </div>
+        
+        <span class="spacer"></span>
+        
+        <div class="header-actions">
+          <button mat-button routerLink="/projects">Projects</button>
+          <button mat-button [matMenuTriggerFor]="userMenu">
+            <mat-icon>account_circle</mat-icon>
+            <span>Account</span>
+          </button>
+        </div>
+      </mat-toolbar>
+
+      <!-- Notification Menu -->
+      <mat-menu #notificationMenu="matMenu">
+        <button mat-menu-item *ngFor="let project of needAttentionProjects()" (click)="goToProjects()">
+          <mat-icon>warning</mat-icon>
+          <span>{{ project.name }} needs attention</span>
+        </button>
+        <button mat-menu-item *ngIf="needAttentionProjects().length === 0">
+          <mat-icon>check_circle</mat-icon>
+          <span>No projects need attention</span>
+        </button>
+      </mat-menu>
+
+      <!-- User Menu -->
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+      <!-- Main Content -->
+      <div class="content">
+        <!-- Activity Status Cards -->
+        <div class="activity-status">
+          <h2><mat-icon>bar_chart</mat-icon> Activity Status</h2>
+          <div class="status-cards">
+            <mat-card class="status-card blue" (click)="goToProjects('active')">
+              <mat-icon class="card-icon">play_circle_filled</mat-icon>
+              <div class="card-content">
+                <div class="card-label">Active Projects</div>
+                <div class="card-value">{{ dashboardStats().activeProjects }}</div>
+                <div class="card-subtitle">Currently Running</div>
+              </div>
+            </mat-card>
+
+            <mat-card class="status-card orange" (click)="goToProjects('pending')">
+              <mat-icon class="card-icon">pending</mat-icon>
+              <div class="card-content">
+                <div class="card-label">Pending Projects</div>
+                <div class="card-value">{{ dashboardStats().pendingProjects }}</div>
+                <div class="card-subtitle">Awaiting Start</div>
+              </div>
+            </mat-card>
+
+            <mat-card class="status-card green" (click)="goToProjects('completed')">
+              <mat-icon class="card-icon">check_circle</mat-icon>
+              <div class="card-content">
+                <div class="card-label">Completed Projects</div>
+                <div class="card-value">{{ dashboardStats().completedProjects }}</div>
+                <div class="card-subtitle">Successfully Finished</div>
+              </div>
+            </mat-card>
+
+            <mat-card class="status-card yellow">
+              <mat-icon class="card-icon">trending_up</mat-icon>
+              <div class="card-content">
+                <div class="card-label">Average Progress</div>
+                <div class="card-value">{{ dashboardStats().averageProgress }}%</div>
+                <div class="card-subtitle">Overall Health</div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+
+        <!-- Project Overview -->
+        <div class="project-statistics">
+          <h2><mat-icon>pie_chart</mat-icon> Project Overview</h2>
+          <div class="stats-grid">
+            <mat-card class="stat-card" (click)="goToProjects()">
+              <div class="stat-header">
+                <mat-icon color="primary">folder_open</mat-icon>
+                <span>Total Projects</span>
+              </div>
+              <div class="stat-value">{{ dashboardStats().totalProjects }}</div>
+            </mat-card>
+
+            <mat-card class="stat-card" (click)="goToProjects('attention')">
+              <div class="stat-header">
+                <mat-icon style="color: #f44336;">warning</mat-icon>
+                <span>Need Attention</span>
+              </div>
+              <div class="stat-value">{{ dashboardStats().needAttention }}</div>
+            </mat-card>
+
+            <mat-card class="stat-card" (click)="goToProjects('install')">
+              <div class="stat-header">
+                <mat-icon style="color: #4CAF50;">install_desktop</mat-icon>
+                <span>Install Projects</span>
+              </div>
+              <div class="stat-value">{{ projectsByType().install }}</div>
+            </mat-card>
+
+            <mat-card class="stat-card" (click)="goToProjects('migrate')">
+              <div class="stat-header">
+                <mat-icon style="color: #FF9800;">sync_alt</mat-icon>
+                <span>Migration Projects</span>
+              </div>
+              <div class="stat-value">{{ projectsByType().migrate }}</div>
+            </mat-card>
+
+            <mat-card class="stat-card" (click)="goToProjects('upgrade')">
+              <div class="stat-header">
+                <mat-icon style="color: #9C27B0;">upgrade</mat-icon>
+                <span>Upgrade Projects</span>
+              </div>
+              <div class="stat-value">{{ projectsByType().upgrade }}</div>
+            </mat-card>
+          </div>
+        </div>
+
+        <!-- Progress Status -->
+        <div class="progress-section">
+          <div class="section-header">
+            <h2><mat-icon>trending_up</mat-icon> Progress Status</h2>
+            <div class="filter-chips">
+              <mat-chip-set>
+                <mat-chip [class.selected]="selectedFilter() === 'all'" (click)="selectedFilter.set('all')">
+                  All ({{ projects().length }})
+                </mat-chip>
+                <mat-chip [class.selected]="selectedFilter() === 'active'" (click)="selectedFilter.set('active')">
+                  Active ({{ dashboardStats().activeProjects }})
+                </mat-chip>
+                <mat-chip [class.selected]="selectedFilter() === 'pending'" (click)="selectedFilter.set('pending')">
+                  Pending ({{ dashboardStats().pendingProjects }})
+                </mat-chip>
+                <mat-chip [class.selected]="selectedFilter() === 'completed'" (click)="selectedFilter.set('completed')">
+                  Completed ({{ dashboardStats().completedProjects }})
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+          </div>
+          
+          @if (filteredProjects().length === 0) {
+            <mat-card class="no-projects-card">
+              <mat-icon>info</mat-icon>
+              <h3>No {{ selectedFilter() === 'all' ? '' : selectedFilter() }} projects found</h3>
+              <p>Go to Projects page to create new projects</p>
+              <button mat-raised-button color="primary" routerLink="/projects">
+                <mat-icon>add</mat-icon>
+                Go to Projects
+              </button>
+            </mat-card>
+          }
+
+          @for (project of filteredProjects(); track project.id) {
+            <mat-card class="project-card">
+              <div class="project-header">
+                <div class="project-title-section">
+                  <h3>{{ project.name }}</h3>
+                  <span class="project-type">{{ project.type }}</span>
+                </div>
+                <mat-chip [class]="'status-chip-' + project.status">
+                  <mat-icon>{{ getStatusIcon(project.status) }}</mat-icon>
+                  {{ project.status | titlecase }}
+                </mat-chip>
+              </div>
+              
+              <div class="progress-info">
+                <div class="progress-header">
+                  <span class="progress-label">Progress</span>
+                  <span class="progress-percentage">{{ project.progress }}%</span>
+                </div>
+                <mat-progress-bar 
+                  mode="determinate" 
+                  [value]="project.progress"
+                  [class]="'progress-' + project.status">
+                </mat-progress-bar>
+              </div>
+              
+              <div class="project-meta">
+                <div class="meta-item">
+                  <mat-icon>calendar_today</mat-icon>
+                  <span>Started: {{ formatDate(project.startDate) }}</span>
+                </div>
+                <div class="meta-item">
+                  <mat-icon>timer</mat-icon>
+                  <span>{{ getProjectDuration(project.startDate) }}</span>
+                </div>
+              </div>
+              
+              <div class="project-actions">
+                @if (project.status === 'active') {
+                  <button mat-raised-button color="accent" (click)="pauseProject(project)">
+                    <mat-icon>pause</mat-icon>
+                    Pause
+                  </button>
+                }
+                @if (project.status === 'pending') {
+                  <button mat-raised-button color="accent" (click)="startProject(project)">
+                    <mat-icon>play_arrow</mat-icon>
+                    Start
+                  </button>
+                }
+                <button mat-icon-button color="warn" (click)="deleteProject(project)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          }
+        </div>
+      </div>
+    </div>

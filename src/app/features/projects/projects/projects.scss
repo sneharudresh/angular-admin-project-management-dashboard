@@ -1,0 +1,172 @@
+ .projects-container {
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .content {
+      padding: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .table-header h1 {
+      margin: 0;
+      color: #333;
+    }
+
+    .table-header button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .search-field {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .filters mat-form-field {
+      min-width: 180px;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .projects-table {
+      width: 100%;
+    }
+
+    .projects-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .title-cell {
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .table-row {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .table-row:hover {
+      background-color: #f5f5f5;
+    }
+
+    .status-chip-active {
+      background-color: #4CAF50 !important;
+      color: white !important;
+    }
+
+    .status-chip-completed {
+      background-color: #2196F3 !important;
+      color: white !important;
+    }
+
+    .status-chip-pending {
+      background-color: #FF9800 !important;
+      color: white !important;
+    }
+
+    .priority-chip-high {
+      background-color: #f44336 !important;
+      color: white !important;
+    }
+
+    .priority-chip-medium {
+      background-color: #FF9800 !important;
+      color: white !important;
+    }
+
+    .priority-chip-low {
+      background-color: #4CAF50 !important;
+      color: white !important;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 40px !important;
+      color: #999;
+      font-style: italic;
+    }
+
+    mat-paginator {
+      border-top: 1px solid #e0e0e0;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 15px;
+      }
+
+      .filters {
+        flex-direction: column;
+      }
+
+      .filters mat-form-field {
+        width: 100%;
+      }
+
+      .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+    }
