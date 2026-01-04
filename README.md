@@ -1,82 +1,107 @@
-# Employee Onboarding & Admin Dashboard – Angular
+# Angular Admin Project Management Dashboard
 
-A modern **Employee Onboarding Portal with Admin Dashboard** built using **Angular**.  
-This application demonstrates onboarding workflows, admin project management, and clean UI design suitable for real-world enterprise systems.
+A modern **Admin Project Management Dashboard** built using **Angular**.  
+This application demonstrates authentication (login & signup), admin dashboard analytics, project management workflows, and a clean enterprise-style UI suitable for real-world admin systems.
 
 ---
 
 ## 🔗 Live Demo
-👉 https://sneharudresh.github.io/angular-employee-onboarding-stepper-forms/
+
+👉 https://sneharudresh.github.io/angular-admin-project-management-dashboard/login
 
 ---
 
-## ✨ Application Modules
+## ✨ Application Features
 
 ### 🔐 Authentication
 - Login page
-- Admin account creation UI
-
-### 🧾 Employee Onboarding
-- Stepper-based onboarding process
-- Personal Details
-- Job Details
-- Document Submission
-- Submission success confirmation
+- Signup (Admin Registration) page
+- Clean authentication UI flow
+- Route-based navigation structure
 
 ### 📊 Admin Dashboard
-- Activity status overview
-- Active, Pending, and Completed projects
-- Progress tracking with visual indicators
-- Project summary cards
+- Overview cards for project status
+- Active, Pending, and Completed project indicators
+- Dashboard summary widgets
+- Modern admin layout using Angular Material
 
-### 📁 Projects Management
-- View all projects in tabular format
-- Filter by status and priority
-- Pagination support
+### 📁 Project Management
+- View all projects in a structured table
+- Project status and priority indicators
 - Action menu per project
+- Clean and readable admin UI
 
 ### ➕ New Project Creation
-- Create new projects from Admin panel
-- Assign project details, priority, and status
-- Integrated into project listing workflow
+- Dedicated Create New Project page
+- Add project name, priority, and status
+- Integrated into project listing
+- Admin-controlled project workflow
 
 ---
 
 ## 🖼️ Screenshots
 
+Create a folder named `screenshots/` in the project root and add images.
+
 ### Login Page
 ![Login](screenshots/login.png)
+
+### Signup Page
+![Signup](screenshots/signup.png)
 
 ### Admin Dashboard
 ![Dashboard](screenshots/admin-dashboard.png)
 
 ### Projects List
-![Projects List](screenshots/projects-list.png)
+![Projects](screenshots/projects-page.png)
 
 ### New Project Creation
 ![New Project](screenshots/new-project.png)
 
-### Employee Onboarding Form
-![Onboarding](screenshots/onboarding-form.png)
-
-### Submission Success Page
-![Success](screenshots/success-page.png)
-
 ---
 
 ## 🛠️ Tech Stack
-- **Angular**
-- **Angular Material**
-- **TypeScript**
-- **HTML / SCSS**
-- **GitHub Pages** (Deployment)
+- Angular
+- Angular Material
+- TypeScript
+- HTML / SCSS
+- GitHub Pages (Deployment)
 
 ---
 
-## 🚀 Local Setup
+## 🚀 Local Development Setup
 
-```bash
-git clone https://github.com/sneharudresh/angular-employee-onboarding-stepper-forms.git
-cd angular-employee-onboarding-stepper-forms
+git clone https://github.com/sneharudresh/angular-admin-project-management-dashboard.git
+cd angular-admin-project-management-dashboard
 npm install
 ng serve
+
+Open in browser:
+http://localhost:4200
+
+---
+
+## 🌐 Deployment
+
+ng build --configuration production  
+npx angular-cli-ghpages --dir=dist/admin-dashboard-angular20-app/browser
+
+---
+
+## 📌 Purpose of This Project
+- Showcase Angular admin dashboard skills
+- Demonstrate authentication UI (login & signup)
+- Build a freelancer-ready portfolio project
+- Practice real-world admin panel architecture
+
+---
+
+## 👩‍💻 Author
+
+Sneha Rudresh  
+Frontend Developer | Angular  
+GitHub: https://github.com/sneharudresh
+
+---
+
+⭐ If you like this project, give it a star on GitHub!
